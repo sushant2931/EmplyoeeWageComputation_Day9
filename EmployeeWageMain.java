@@ -53,7 +53,7 @@ public class EmployeeWageMain {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Employee Wage Computation Program Calculate Monthly Wage using Condition");
+		System.out.println("Welcome to Employee Wage Computation Program Refractor the Code");
 
 		EmployeeWageMain emp = new EmployeeWageMain();
 		System.out.println("Monthly wage :" + emp.calcMonthlyWage());
