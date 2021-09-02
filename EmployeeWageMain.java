@@ -19,17 +19,20 @@ public class EmployeeWageMain {
 
 	public void calcDailyEmpWage(int empType) {
 
-		if (empType == FULL_TIME) {
+		switch (empType) {
+		case FULL_TIME:
 			dailyEmpWage = WAGE_PER_HR * FULL_TIME_HR;
 			System.out.println("Full time Daily Employee Wage :" + dailyEmpWage);
-		} else {
+			break;
+		default:
 			dailyEmpWage = WAGE_PER_HR * PART_TIME_HR;
 			System.out.println("Part time Daily Employee Wage :" + (dailyEmpWage));
 		}
+
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
+		System.out.println("Welcome to Employee Wage Computation Program on Using Switch Case");
 
 		EmployeeWageMain emp = new EmployeeWageMain();
 		int empCheck = (int) (Math.random() * 10) % 2;
@@ -39,6 +42,6 @@ public class EmployeeWageMain {
 		} else {
 			System.out.println("Employee is absent");
 		}
-	}
 
+	}
 }
