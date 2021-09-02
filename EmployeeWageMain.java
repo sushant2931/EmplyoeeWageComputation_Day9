@@ -10,6 +10,8 @@ public class EmployeeWageMain {
 
 	int dailyEmpWage = 0;
 	int monthlyWage = 0;
+	int totalHr = 0;
+	int totalAttendance = 0;
 
 	public boolean checkIsPresent(double empCheck) {
 		if (empCheck == IS_PRESENT) {
@@ -23,9 +25,11 @@ public class EmployeeWageMain {
 
 		switch (empType) {
 		case FULL_TIME:
+			totalHr += FULL_TIME_HR;
 			dailyEmpWage = WAGE_PER_HR * FULL_TIME_HR;
 			break;
 		default:
+			totalHr += PART_TIME_HR;
 			dailyEmpWage = WAGE_PER_HR * PART_TIME_HR;
 		}
 		return dailyEmpWage;
@@ -34,19 +38,22 @@ public class EmployeeWageMain {
 	public int calcMonthlyWage() {
 
 		int dailyWage = 0;
-		for (int day = 1; day <= WORKING_DAYS; day++) {
-			int empCheck = (int) (Math.random() * 10) % 2;
-			if (checkIsPresent(empCheck)) {
-				int empType = (int) (Math.random() * 10) % 2;
-				dailyWage = calcDailyEmpWage(empType);
-				monthlyWage += dailyWage;
+		while (totalAttendance <= 20 && totalHr <= 100) {
+			for (int day = 1; day <= WORKING_DAYS; day++) {
+				int empCheck = (int) (Math.random() * 10) % 2;
+				if (checkIsPresent(empCheck)) {
+					totalAttendance++;
+					int empType = (int) (Math.random() * 10) % 2;
+					dailyWage = calcDailyEmpWage(empType);
+					monthlyWage += dailyWage;
+				}
 			}
 		}
 		return monthlyWage;
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Employee Wage Computation Program Calculate Monthly Wage");
+		System.out.println("Welcome to Employee Wage Computation Program Calculate Monthly Wage using Condition");
 
 		EmployeeWageMain emp = new EmployeeWageMain();
 		System.out.println("Monthly wage :" + emp.calcMonthlyWage());
