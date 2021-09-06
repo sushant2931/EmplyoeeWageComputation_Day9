@@ -1,61 +1,41 @@
 
 public class EmployeeWageMain {
 
-	static final int IS_PRESENT = 1;
-	static final int WAGE_PER_HR = 20;
-	static final int WORKING_DAYS = 20;
-	static final int FULL_TIME_HR = 16;
-	static final int PART_TIME_HR = 8;
-	static final int FULL_TIME = 1;
-
-	int dailyEmpWage = 0;
-	int monthlyWage = 0;
-	int totalHr = 0;
-	int totalAttendance = 0;
-
-	public boolean checkIsPresent(double empCheck) {
-		if (empCheck == IS_PRESENT) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public int calcDailyEmpWage(int empType) {
-
-		switch (empType) {
-		case FULL_TIME:
-			totalHr += FULL_TIME_HR;
-			dailyEmpWage = WAGE_PER_HR * FULL_TIME_HR;
-			break;
-		default:
-			totalHr += PART_TIME_HR;
-			dailyEmpWage = WAGE_PER_HR * PART_TIME_HR;
-		}
-		return dailyEmpWage;
-	}
-
-	public int calcMonthlyWage() {
-
-		int dailyWage = 0;
-		while (totalAttendance <= 20 && totalHr <= 100) {
-			for (int day = 1; day <= WORKING_DAYS; day++) {
-				int empCheck = (int) (Math.random() * 10) % 2;
-				if (checkIsPresent(empCheck)) {
-					totalAttendance++;
-					int empType = (int) (Math.random() * 10) % 2;
-					dailyWage = calcDailyEmpWage(empType);
-					monthlyWage += dailyWage;
-				}
-			}
-		}
-		return monthlyWage;
-	}
-
 	public static void main(String[] args) {
-		System.out.println("Welcome to Employee Wage Computation Program Refractor the Code");
+		EmployeeWageMain e = new EmployeeWageMain();
+		e.employeeWage();
+	}
 
-		EmployeeWageMain emp = new EmployeeWageMain();
-		System.out.println("Monthly wage :" + emp.calcMonthlyWage());
+	void employeeWage() {
+		final int max_working_hrs = 100;
+		final int days_in_month = 20;
+		final int wage_per_hr = 20;
+		int working_hr = 0;
+		int total_working_hr = 0;
+		int monthly_total_wage = 0;
+		int is_fulltime_present = 1;
+		int is_parttime_present = 2;
+		int daily_wage_array[] = new int[20];
+		for (int i = 0; i < days_in_month && total_working_hr < max_working_hrs; i++) {
+			int emp_check = (int) (Math.floor(Math.random() * 10)) % 3;
+			switch (emp_check) {
+			case 1:
+				working_hr = 8;
+				break;
+			case 2:
+				working_hr = 4;
+				break;
+			default:
+				working_hr = 0;
+			}
+			total_working_hr += working_hr;
+			daily_wage_array[i] = working_hr * wage_per_hr;
+		}
+		for (int j = 0; j < days_in_month; j++) {
+			int day = j + 1;
+			System.out.println("Day " + day + " wage is " + daily_wage_array[j]);
+			monthly_total_wage = monthly_total_wage + daily_wage_array[j];
+		}
+		System.out.println("\nMonthly wage is " + monthly_total_wage);
 	}
 }
